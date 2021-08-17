@@ -19,8 +19,10 @@ void colorCollision() {
   //refactoring...
   int width = 10;
   int height = 10;
-  color c = img.get(mouseX -radiusKreis, mouseY -radiusKreis, 50, 50);
-  //println(hex(c));
+  color c = img.get(mouseX, mouseY);
+  //TODO: PImage colorArea = img.get(mouseX -radiusKreis, mouseY -radiusKreis, 50, 50);
+  //color c = colorArea.get();
+
   String colorCircle = hex(c, 6);
   switch(colorCircle) {
     case "FFFFFF":
