@@ -14,10 +14,43 @@ void labyrinth() {
   endShape();
 }
 
+void colorCollision() {
+
+  //refactoring...
+  int width = 10;
+  int height = 10;
+  color c = img.get(mouseX -radiusKreis, mouseY -radiusKreis, 50, 50);
+  //println(hex(c));
+  String colorCircle = hex(c, 6);
+  switch(colorCircle) {
+    case "FFFFFF":
+      // weiss --> gut
+      light = #00FF00;
+      break;
+    case "000000":
+      // schwarz
+      light = #FF0000;
+      println("black");
+      if (radiusKreis > 10) {
+        radiusKreis -= 1;
+      }
+      break;
+    case "00BAFF":
+      // lightblue
+      textSize(40);
+      fill(#00BAFF);
+      text("You Win", 100, 100);
+      break;
+    default :
+      println(colorCircle);
+      break;	
+  }
+}
+
 void scheibe(float startX, float startY) {
-  fill(0);
+  fill(light);
   strokeWeight(0);
-  circle(startX, startY, 25);
+  circle(startX, startY, radiusKreis);
 }
 
 void ende(int endeX, int endeY) {
@@ -45,3 +78,4 @@ void edgeCircle() {
   
   scheibe(mx, my);
 }
+

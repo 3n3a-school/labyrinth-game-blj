@@ -6,19 +6,40 @@ int endeY = 300;
 
 float mx;
 float my;
-float easing = 1; // bigger = faster (0.2)
+float easing = 0.5; // bigger = faster (0.2)
 int radius = 24;
 int edge = 1;
 int inner = edge + radius;
 
+int radiusKreis = 25;
+
+int light = #000000;
+
+PImage img;
+
 void setup() {
-  size(640, 480);;
+  size(1920, 1080);
+  frameRate(30);
+
+  img = loadImage("bg.png");
 };
 
 void draw () {
   noCursor();
-  background(0,0,0);
-  labyrinth(); 
-  ende(endeX, endeY);
+  //labyrinth(); 
+
+  // set image as background
+  set(0,0, img);
+
+  
+  //ende(endeX, endeY);
   edgeCircle(); 
+  // color deteciton only after starting
+  colorCollision();
+}
+
+void keyPressed() {
+  if (key == 'A') {
+    radiusKreis =24;
+  }
 }
