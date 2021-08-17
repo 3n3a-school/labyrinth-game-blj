@@ -12,3 +12,9 @@ void labyrinth() {
   vertex(500, 300);
   endShape();
 }
+
+void scheibe(int startX, int startY) {
+  fill(0);
+  strokeWeight(0);
+  circle(startX, startY, 25);
+}
