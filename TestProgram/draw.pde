@@ -18,3 +18,12 @@ void scheibe(int startX, int startY) {
   strokeWeight(0);
   circle(startX, startY, 25);
 }
+
+void ende(int endeX, int endeY) {
+  fill(#1ac6ff);
+  strokeWeight(0);
+  circle(endeX, endeY, 50);
+  textSize(20);
+  fill(0);
+  text("Ziel", 485, 305);
+}
