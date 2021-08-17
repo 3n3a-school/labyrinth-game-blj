@@ -18,3 +18,4 @@ void scheibe(int startX, int startY) {
   strokeWeight(0);
   circle(startX, startY, 25);
 }
+
