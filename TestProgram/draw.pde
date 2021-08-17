@@ -1,11 +1,14 @@
-void texting(String text) {
-  text(text, mouseX, mouseY);
-}
-
-void draw1() {
-  for (int i = 0; i < 100; i++) {
-    float r = random(50);
-    stroke(r*5);
-    line(50, i, 50+r, i);
-  }
+void labyrinth() {
+  noFill();
+  stroke(#FFFFFF);
+  strokeWeight(40.0);
+  strokeJoin(MITER);
+  beginShape();
+  vertex(50, 80);
+  vertex(500, 80);
+  vertex(500, 200);
+  vertex(100, 400);
+  vertex(500, 400);
+  vertex(500, 300);
+  endShape();
 }
