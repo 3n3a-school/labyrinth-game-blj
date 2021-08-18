@@ -1,8 +1,6 @@
 // startposition scheibe
 int startX = 50;
 int startY = 80;
-int endeX = 500;
-int endeY = 300;
 
 float mx;
 float my;
@@ -13,7 +11,7 @@ int inner = edge + radius;
 
 int radiusKreis = 25;
 
-int light = #000000;
+int colorKreis = #000000;
 
 PImage img;
 
@@ -27,14 +25,9 @@ void setup() {
 
 void draw () {
   //noCursor();
-  //labyrinth(); 
 
   // set image as background
   set(0,0, img);
-
-  
-  //ende(endeX, endeY);
-  //edgeCircle(); 
   // color deteciton only after starting
   scheibe(mouseX, mouseY);
   colorCollision();
