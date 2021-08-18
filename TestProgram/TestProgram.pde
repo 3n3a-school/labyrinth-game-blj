@@ -7,17 +7,18 @@ int startY = initY;
 int radiusKreis = initKreis;
 int colorKreis = #000000;
 
+float startTime, runTime;
+
 String screen = "start"; // start, game, gameOver, imZiel
 
 PImage img, arrow;
 
 void setup() {
-  //fullScreen();
   size(1920, 1080);
   frameRate(30);
   ellipseMode(RADIUS);
   img = loadImage("Labyrinth.png");
-
+  startTime = millis() / 1000;
 };
 
 void draw () {
@@ -34,18 +35,21 @@ void draw () {
       set(0,0, img);
       generiereScheibe(startX, startY);
       colorCollision();
+      timer(500, 50);
     break;
     case "gameOver" :
       gameOver();
       startX = initX;
       startY = initY;
       radiusKreis = initKreis;
+      startTime = millis() / 1000;
     break;	
     case "ziel" :
       endingScreen();
       startX = initX;
       startY = initY;
       radiusKreis = initKreis;
+      startTime = millis() / 1000;
     break;	
     default :
       text("Error Screen not Found.", 1000, 1000);

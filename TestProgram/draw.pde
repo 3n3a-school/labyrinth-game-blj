@@ -99,3 +99,11 @@ void startingScreen(){
   arrow.resize(200, 200);
   image(arrow, 100, 30);
 }
+
+void timer(int x, int y) {
+  textSize(40);
+  fill(#FF0000);
+  float currentTime = (float) millis() / 1000;
+  String time = nf(currentTime - startTime, 0, 3);
+  text(time, x, y);
+}
