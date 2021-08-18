@@ -14,45 +14,64 @@ void labyrinth() {
   endShape();
 }
 
-void colorCollision() {
+String getColorHex(int x, int y) {
+  color c = img.get(x, y);
+  return hex(c, 6);
+}
 
-  //refactoring...
-  int width = 10;
-  int height = 10;
-  color c = img.get(mouseX, mouseY);
-  //TODO: PImage colorArea = img.get(mouseX -radiusKreis, mouseY -radiusKreis, 50, 50);
-  //color c = colorArea.get();
+void decideOnColor(StringList list) {
+  String black = "000000";
+  String white = "FFFFFF";
+  String lightblue = "00BAFF";
 
-  String colorCircle = hex(c, 6);
-  switch(colorCircle) {
-    case "FFFFFF":
-      // weiss --> gut
+  // if list 4 values with FFFFFF
+  if (list.hasValue(black)) {
+    // black
+    light = #FF0000;
+    println("black");
+    if (radiusKreis > 10) {
+      radiusKreis -= 1;
+    }
+  } else if (!list.hasValue(black)) {
+    if (list.hasValue(white)) {
+      // white
       light = #00FF00;
-      break;
-    case "000000":
-      // schwarz
-      light = #FF0000;
-      println("black");
-      if (radiusKreis > 10) {
-        radiusKreis -= 1;
-      }
-      break;
-    case "00BAFF":
-      // lightblue
+    }
+    if (list.hasValue(lightblue)) {
+      // light-blue: Ziel
       textSize(40);
       fill(#00BAFF);
       text("You Win", 100, 100);
-      break;
-    default :
-      println(colorCircle);
-      break;	
+    }
+
   }
+}
+
+void colorCollision() {
+  // kollisoinsradius ist 1% kleiner als eigentlicher
+  int radiusKollision = radiusKreis;
+  // use radiusKreis, because changes, when it gets smaller
+  int upperMiddleY = mouseY - radiusKollision;
+  int lowerMiddleY = mouseY + radiusKollision;
+  int leftMiddleX = mouseX - radiusKollision;
+  int rightMiddleX = mouseX + radiusKollision;
+ 
+  StringList colorValuesList = new StringList();
+
+  // get color for the four points on circle
+  colorValuesList.append(getColorHex(mouseX, upperMiddleY));
+  colorValuesList.append(getColorHex(mouseX, lowerMiddleY));
+  colorValuesList.append(getColorHex(leftMiddleX, mouseY));
+  colorValuesList.append(getColorHex(rightMiddleX, mouseY));
+  
+  decideOnColor(colorValuesList);
+  
 }
 
 void scheibe(float startX, float startY) {
   fill(light);
   strokeWeight(0);
-  circle(startX, startY, radiusKreis);
+  ellipse(startX, startY, radiusKreis, radiusKreis);
 }
 
 void ende(int endeX, int endeY) {

@@ -6,7 +6,7 @@ int endeY = 300;
 
 float mx;
 float my;
-float easing = 0.5; // bigger = faster (0.2)
+float easing = 1; // bigger = faster (0.2)
 int radius = 24;
 int edge = 1;
 int inner = edge + radius;
@@ -20,12 +20,13 @@ PImage img;
 void setup() {
   size(1920, 1080);
   frameRate(30);
+  ellipseMode(RADIUS);
 
   img = loadImage("bg.png");
 };
 
 void draw () {
-  noCursor();
+  //noCursor();
   //labyrinth(); 
 
   // set image as background
@@ -33,8 +34,9 @@ void draw () {
 
   
   //ende(endeX, endeY);
-  edgeCircle(); 
+  //edgeCircle(); 
   // color deteciton only after starting
+  scheibe(mouseX, mouseY);
   colorCollision();
 }
 
