@@ -1,23 +1,13 @@
 // startposition scheibe
 int initX = 50;
 int initY = 80;
+int initKreis = 40;
 int startX = initX;
 int startY = initY;
-boolean imZiel = false;
-boolean overScheibe = false;
-boolean isStarted = false;
-boolean gameOver = false;
-
-float mx;
-float my;
-float easing = 1; // bigger = faster (0.2)
-int radius = 24;
-int edge = 1;
-int inner = edge + radius;
-
-int radiusKreis = 25;
-
+int radiusKreis = initKreis;
 int colorKreis = #000000;
+
+String screen = "start"; // start, game, gameOver, imZiel
 
 PImage img;
 
@@ -31,66 +21,51 @@ void setup() {
 };
 
 void draw () {
-  //noCursor()
-
-  // before starting game
-  if (!isStarted) {
-    update();
-  } else {
-    startX = mouseX;
-    startY = mouseY;
-  }
-
-  //as long as player not in Ziel
-  if(!imZiel){
-    set(0,0, img);
-    generiereScheibe(startX, startY);
-    colorCollision();
-  } else {
-    restartGame("ziel");
-  } 
-  if (gameOver && !imZiel) {
-    restartGame("gameover");
-  }
-  
-}
-
-void restartGame(String selection) {
-  switch (selection) {
-    case "gameover":
+  switch (screen) {
+    case "start" :
+      update();
+      set(0,0, img);
+      generiereScheibe(startX, startY);
+    break;
+    case "game" :
+      // Koordinaten des Scheibe zu Koordinaten der Maus
+      startX = mouseX;
+      startY = mouseY;
+      set(0,0, img);
+      generiereScheibe(startX, startY);
+      colorCollision();
+    break;
+    case "gameOver" :
       gameOver();
-      isStarted = false;
       startX = initX;
       startY = initY;
-    break;
-    case "ziel":
+      radiusKreis = initKreis;
+    break;	
+    case "ziel" :
       endingScreen();
-      isStarted = false;
       startX = initX;
       startY = initY;
-    break;
+      radiusKreis = initKreis;
+    break;	
+    default :
+      text("Error Screen not Found.", 1000, 1000);
+    break;	
   }
 }
 
 void keyPressed() {
-    if (key == 32) {
-     if (imZiel == true) {
-       imZiel = false;
-       gameOver = false;
-     } else if (gameOver) {
-       imZiel = false;
-       gameOver = false;
-     }
+  if (key == 32) {
+    if (screen == "ziel") {
+      screen = "start";
+    } else if (screen == "gameOver") {
+      screen = "start";
     }
-  
+  }
 }
 
 void update() {
   if ( overCircle(startX, startY, radiusKreis) ) {
-    overScheibe = true;
-    isStarted = true;
-  } else {
-    overScheibe = false;
+    screen = "game";
   }
 }
 
