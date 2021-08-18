@@ -12,7 +12,7 @@ int collisions = 0;
 
 String screen = "start"; // start, game, gameOver, imZiel
 
-PImage img;
+PImage img, arrow;
 
 void setup() {
   size(1920, 1080);
