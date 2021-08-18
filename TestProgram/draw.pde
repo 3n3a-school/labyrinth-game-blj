@@ -9,19 +9,31 @@ void decideOnColor(StringList list) {
   String lightblue = "00BAFF";
 
   // if list 4 values with FFFFFF
+
+  // deteciton touching wall
   if (list.hasValue(black)) {
-    // black
-    colorKreis = #FF0000;
-    //println("black");
-    if (radiusKreis > 10) {
-      radiusKreis -= 1;
+    // discovery if fully immersed in black
+    if (!list.hasValue(lightblue) && !list.hasValue(white)){
+      println("gameover");
+      gameOver = true;
+    } else {
+      println("is only touching");
+      // black
+      colorKreis = #FF0000;
+      //println("black");
+      if (radiusKreis > 10) {
+        radiusKreis -= 1;
+      }
     }
+    
   } else if (!list.hasValue(black)) {
     if (list.hasValue(white)) {
       // white
       colorKreis = #00FF00;
     }
   }
+
+  // detection of ziel
   if (!list.hasValue(black) && !list.hasValue(white)){
     if (list.hasValue(lightblue)) {
       // colorKreis-blue: Ziel
@@ -57,11 +69,21 @@ void generiereScheibe(float startX, float startY) {
   ellipse(startX, startY, radiusKreis, radiusKreis);
 }
 
+// funktion mit parameter damit keine repetition nötig
 void endingScreen(){
   textSize(100);
   fill(#FFFFFF);
   background(#00BAFF);
   text("You Win", 700, 500);
+  textSize(80);
+  text("Press SPACE to play again", 450, 600);
+}
+
+void gameOver(){
+  textSize(100);
+  fill(#FFFFFF);
+  background(#FF0000);
+  text("Game Over", 700, 500);
   textSize(80);
   text("Press SPACE to play again", 450, 600);
 }

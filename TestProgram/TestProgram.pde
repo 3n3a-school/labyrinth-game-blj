@@ -6,6 +6,7 @@ int startY = initY;
 boolean imZiel = false;
 boolean overScheibe = false;
 boolean isStarted = false;
+boolean gameOver = false;
 
 float mx;
 float my;
@@ -31,6 +32,8 @@ void setup() {
 
 void draw () {
   //noCursor()
+
+  // before starting game
   if (!isStarted) {
     update();
   } else {
@@ -38,24 +41,45 @@ void draw () {
     startY = mouseY;
   }
 
-  // set image as background
+  //as long as player not in Ziel
   if(!imZiel){
     set(0,0, img);
-    // color deteciton only after starting
     generiereScheibe(startX, startY);
     colorCollision();
   } else {
-    endingScreen();
-    isStarted = false;
-    startX = initX;
-    startY = initY;
+    restartGame("ziel");
+  } 
+  if (gameOver && !imZiel) {
+    restartGame("gameover");
+  }
+  
+}
+
+void restartGame(String selection) {
+  switch (selection) {
+    case "gameover":
+      gameOver();
+      isStarted = false;
+      startX = initX;
+      startY = initY;
+    break;
+    case "ziel":
+      endingScreen();
+      isStarted = false;
+      startX = initX;
+      startY = initY;
+    break;
   }
 }
 
 void keyPressed() {
     if (key == 32) {
      if (imZiel == true) {
-     imZiel = false;
+       imZiel = false;
+       gameOver = false;
+     } else if (gameOver) {
+       imZiel = false;
+       gameOver = false;
      }
     }
   
