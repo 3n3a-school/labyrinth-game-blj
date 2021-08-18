@@ -87,3 +87,14 @@ void gameOver(){
   textSize(80);
   text("Press SPACE to play again", 450, 600);
 }
+
+void startingScreen(){
+  textSize(100);
+  fill(#FFFFFF);
+  background(#33cccc);
+  text("Welcome to our labyrinth", 350, 400);
+  textSize(50);
+  text("Please enter your name and press SPACE to start the game", 250, 500);
+  textSize(30);
+  text("Developed by Enea, Janis, Nando and Lilly", 600, 600);
+}

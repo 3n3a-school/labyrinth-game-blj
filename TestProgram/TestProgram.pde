@@ -11,11 +11,11 @@ boolean gameOver = false;
 float mx;
 float my;
 float easing = 1; // bigger = faster (0.2)
-int radius = 24;
+int radius = 39;
 int edge = 1;
 int inner = edge + radius;
 
-int radiusKreis = 25;
+int radiusKreis = 40;
 
 int colorKreis = #000000;
 
@@ -26,8 +26,7 @@ void setup() {
   size(1920, 1080);
   frameRate(30);
   ellipseMode(RADIUS);
-
-  img = loadImage("bg.png");
+  img = loadImage("Labyrinth.png");
 };
 
 void draw () {
