@@ -24,7 +24,7 @@ void draw () {
   switch (screen) {
     case "start" :
       update();
-      set(0,0, img);
+      startingScreen();
       generiereScheibe(startX, startY);
     break;
     case "game" :
