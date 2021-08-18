@@ -14,10 +14,8 @@ void decideOnColor(StringList list) {
   if (list.hasValue(black)) {
     // discovery if fully immersed in black
     if (!list.hasValue(lightblue) && !list.hasValue(white)){
-      println("gameover");
-      gameOver = true;
+      screen = "gameOver";
     } else {
-      println("is only touching");
       // black
       colorKreis = #FF0000;
       //println("black");
@@ -37,7 +35,7 @@ void decideOnColor(StringList list) {
   if (!list.hasValue(black) && !list.hasValue(white)){
     if (list.hasValue(lightblue)) {
       // colorKreis-blue: Ziel
-      imZiel = true;
+      screen = "ziel";
     }
   }
 }
