@@ -7,7 +7,8 @@ int startY = initY;
 int radiusKreis = initKreis;
 int colorKreis = #000000;
 
-float startTime, runTime;
+float startTime, runTime, stopTime;
+int collisions = 0;
 
 String screen = "start"; // start, game, gameOver, imZiel
 
@@ -35,21 +36,15 @@ void draw () {
       set(0,0, img);
       generiereScheibe(startX, startY);
       colorCollision();
-      timer(500, 50);
+      scoreBoard();
     break;
     case "gameOver" :
       gameOver();
-      startX = initX;
-      startY = initY;
-      radiusKreis = initKreis;
-      startTime = millis() / 1000;
+      reset();
     break;	
     case "ziel" :
       endingScreen();
-      startX = initX;
-      startY = initY;
-      radiusKreis = initKreis;
-      startTime = millis() / 1000;
+      reset();
     break;	
     default :
       text("Error Screen not Found.", 1000, 1000);
@@ -65,6 +60,14 @@ void keyPressed() {
       screen = "start";
     }
   }
+}
+
+void reset() {
+  startX = initX;
+  startY = initY;
+  radiusKreis = initKreis;
+  startTime = millis() / 1000;
+  collisions = 0;
 }
 
 void update() {

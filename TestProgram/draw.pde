@@ -22,6 +22,8 @@ void decideOnColor(StringList list) {
       if (radiusKreis > 10) {
         radiusKreis -= 1;
       }
+
+      collisions += 1;
     }
     
   } else if (!list.hasValue(black)) {
@@ -97,10 +99,15 @@ void startingScreen(){
   text("Developed by Enea, Janis, Nando and Lilly", 600, 600);
 }
 
-void timer(int x, int y) {
+void scoreBoard() {
   textSize(40);
   fill(#FF0000);
   float currentTime = (float) millis() / 1000;
   String time = nf(currentTime - startTime, 0, 3);
-  text(time, x, y);
+  text("Time: "+time+" Collisions: "+collisions, 600, 50);
+}
+
+int calcHighscore(float time, int collisions) {
+  int highscore = 
+  return highscore;
 }
