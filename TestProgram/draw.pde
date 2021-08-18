@@ -106,11 +106,15 @@ void scoreBoard() {
   textSize(40);
   fill(#FF0000);
   float currentTime = (float) millis() / 1000;
-  String time = nf(currentTime - startTime, 0, 3);
-  text("Time: "+time+" Collisions: "+collisions, 600, 50);
+  float timeFloat = currentTime - startTime;
+  String time = nf(timeFloat, 0, 3);
+  String time2 = nf(timeFloat, 0, 0);
+  score = calcHighscore(time2, collisions);
+  text("Score: "+score+" Time: "+time+" Collisions: "+collisions, 600, 50);
 }
 
-int calcHighscore(float time, int collisions) {
-  int highscore = 0;
+int calcHighscore(String time, int collisions) {
+  int timeInt = Integer.valueOf(time);
+  int highscore = (int) (score - timeInt - collisions);
   return highscore;
 }

@@ -7,8 +7,9 @@ int startY = initY;
 int radiusKreis = initKreis;
 int colorKreis = #000000;
 
-float startTime, runTime, stopTime;
+float startTime, stopTime;
 int collisions = 0;
+int score = 100;
 
 String screen = "start"; // start, game, gameOver, imZiel
 
