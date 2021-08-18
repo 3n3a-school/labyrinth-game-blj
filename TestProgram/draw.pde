@@ -96,3 +96,11 @@ void startingScreen(){
   textSize(30);
   text("Developed by Enea, Janis, Nando and Lilly", 600, 600);
 }
+
+void timer(int x, int y) {
+  textSize(40);
+  fill(#FF0000);
+  float currentTime = (float) millis() / 1000;
+  String time = nf(currentTime - startTime, 0, 3);
+  text(time, x, y);
+}
