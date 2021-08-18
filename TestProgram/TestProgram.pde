@@ -48,11 +48,13 @@ void draw () {
 }
 
 void keyPressed() {
-  if (key == 'A') {
-    radiusKreis =24;
-  } else if (key == 'B') {
-    imZiel = true;
-  }
+    if (key == 32) {
+      println("Enter gedrückt");
+     if (imZiel == true) {
+     imZiel = false;
+     }
+    }
+  
 }
 
 void update() {

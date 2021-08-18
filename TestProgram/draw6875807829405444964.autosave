@@ -12,7 +12,7 @@ void decideOnColor(StringList list) {
   if (list.hasValue(black)) {
     // black
     colorKreis = #FF0000;
-    //println("black");
+    println("black");
     if (radiusKreis > 10) {
       radiusKreis -= 1;
     }
@@ -21,12 +21,11 @@ void decideOnColor(StringList list) {
       // white
       colorKreis = #00FF00;
     }
-  }
-  if (!list.hasValue(black) && !list.hasValue(white)){
     if (list.hasValue(lightblue)) {
       // colorKreis-blue: Ziel
-      imZiel = true;
+      endingScreen();
     }
+
   }
 }
 
@@ -57,22 +56,11 @@ void generiereScheibe(float startX, float startY) {
   ellipse(startX, startY, radiusKreis, radiusKreis);
 }
 
-void playAgain() {
-  if (keyPressed) {
-    if (key == CODED) {
-      if (keyCode == ENTER || key == RETURN) {
-        imZiel = false;
-      }
-    }
-  }
-}
-
 void endingScreen(){
-  playAgain();
   textSize(100);
   fill(#FFFFFF);
   background(#00BAFF);
   text("You Win", 700, 500);
   textSize(80);
-  text("Press SPACE to play again", 450, 600);
+  text("Do you want to play again?", 450, 600);
 }
