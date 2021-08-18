@@ -17,7 +17,7 @@ int colorKreis = #000000;
 PImage img;
 
 void setup() {
-  fullScreen();
+  //fullScreen();
   size(1920, 1080);
   frameRate(30);
   ellipseMode(RADIUS);
@@ -26,20 +26,23 @@ void setup() {
 };
 
 void draw () {
-  //noCursor();
-  if(imZiel == true){
-    endingScreen();
-  }
+  //noCursor()
 
   // set image as background
-  set(0,0, img);
-  // color deteciton only after starting
-  generiereScheibe(mouseX, mouseY);
-  colorCollision();
+  if(!imZiel){
+    set(0,0, img);
+    // color deteciton only after starting
+    generiereScheibe(mouseX, mouseY);
+    colorCollision();
+  } else {
+    endingScreen();
+  }
 }
 
 void keyPressed() {
   if (key == 'A') {
     radiusKreis =24;
+  } else if (key == 'B') {
+    imZiel = true;
   }
 }

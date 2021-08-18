@@ -12,7 +12,7 @@ void decideOnColor(StringList list) {
   if (list.hasValue(black)) {
     // black
     colorKreis = #FF0000;
-    println("black");
+    //println("black");
     if (radiusKreis > 10) {
       radiusKreis -= 1;
     }
@@ -21,11 +21,12 @@ void decideOnColor(StringList list) {
       // white
       colorKreis = #00FF00;
     }
+  }
+  if (!list.hasValue(black) && !list.hasValue(white)){
     if (list.hasValue(lightblue)) {
       // colorKreis-blue: Ziel
-      
+      imZiel = true;
     }
-
   }
 }
 
