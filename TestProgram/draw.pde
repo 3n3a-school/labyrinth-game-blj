@@ -111,6 +111,6 @@ void scoreBoard() {
 }
 
 int calcHighscore(float time, int collisions) {
-  int highscore = 
+  int highscore = 0;
   return highscore;
 }
