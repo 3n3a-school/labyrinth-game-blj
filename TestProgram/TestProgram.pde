@@ -27,7 +27,7 @@ void setup() {
   frameRate(30);
   ellipseMode(RADIUS);
 
-  img = loadImage("bg.png");
+  img = loadImage("Labyrinth.png");
 };
 
 void draw () {
