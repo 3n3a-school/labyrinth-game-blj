@@ -1,6 +1,7 @@
 // startposition scheibe
 int startX = 50;
 int startY = 80;
+boolean imZiel = false;
 
 float mx;
 float my;
@@ -16,6 +17,7 @@ int colorKreis = #000000;
 PImage img;
 
 void setup() {
+  fullScreen();
   size(1920, 1080);
   frameRate(30);
   ellipseMode(RADIUS);
@@ -25,11 +27,14 @@ void setup() {
 
 void draw () {
   //noCursor();
+  if(imZiel == true){
+    endingScreen();
+  }
 
   // set image as background
   set(0,0, img);
   // color deteciton only after starting
-  scheibe(mouseX, mouseY);
+  generiereScheibe(mouseX, mouseY);
   colorCollision();
 }
 

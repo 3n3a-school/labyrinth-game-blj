@@ -23,9 +23,7 @@ void decideOnColor(StringList list) {
     }
     if (list.hasValue(lightblue)) {
       // colorKreis-blue: Ziel
-      textSize(40);
-      fill(#00BAFF);
-      text("You Win", 100, 100);
+      
     }
 
   }
@@ -52,8 +50,17 @@ void colorCollision() {
   
 }
 
-void generierScheibe(float startX, float startY) {
+void generiereScheibe(float startX, float startY) {
   fill(colorKreis);
   strokeWeight(0);
   ellipse(startX, startY, radiusKreis, radiusKreis);
+}
+
+void endingScreen(){
+  textSize(100);
+  fill(#FFFFFF);
+  background(#00BAFF);
+  text("You Win", 700, 500);
+  textSize(80);
+  text("Do you want to play again?", 450, 600);
 }
