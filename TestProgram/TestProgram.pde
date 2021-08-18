@@ -1,6 +1,8 @@
 // startposition scheibe
-int startX = 50;
-int startY = 80;
+int initX = 50;
+int initY = 80;
+int startX = initX;
+int startY = initY;
 boolean imZiel = false;
 boolean overScheibe = false;
 boolean isStarted = false;
@@ -44,12 +46,14 @@ void draw () {
     colorCollision();
   } else {
     endingScreen();
+    isStarted = false;
+    startX = initX;
+    startY = initY;
   }
 }
 
 void keyPressed() {
     if (key == 32) {
-      println("Enter gedrückt");
      if (imZiel == true) {
      imZiel = false;
      }

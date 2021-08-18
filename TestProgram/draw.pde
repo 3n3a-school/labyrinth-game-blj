@@ -57,18 +57,7 @@ void generiereScheibe(float startX, float startY) {
   ellipse(startX, startY, radiusKreis, radiusKreis);
 }
 
-void playAgain() {
-  if (keyPressed) {
-    if (key == CODED) {
-      if (keyCode == ENTER || key == RETURN) {
-        imZiel = false;
-      }
-    }
-  }
-}
-
 void endingScreen(){
-  playAgain();
   textSize(100);
   fill(#FFFFFF);
   background(#00BAFF);
