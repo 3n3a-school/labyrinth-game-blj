@@ -2,6 +2,8 @@
 int startX = 50;
 int startY = 80;
 boolean imZiel = false;
+boolean overScheibe = false;
+boolean isStarted = false;
 
 float mx;
 float my;
@@ -27,12 +29,18 @@ void setup() {
 
 void draw () {
   //noCursor()
+  if (!isStarted) {
+    update();
+  } else {
+    startX = mouseX;
+    startY = mouseY;
+  }
 
   // set image as background
   if(!imZiel){
     set(0,0, img);
     // color deteciton only after starting
-    generiereScheibe(mouseX, mouseY);
+    generiereScheibe(startX, startY);
     colorCollision();
   } else {
     endingScreen();
@@ -44,5 +52,24 @@ void keyPressed() {
     radiusKreis =24;
   } else if (key == 'B') {
     imZiel = true;
+  }
+}
+
+void update() {
+  if ( overCircle(startX, startY, radiusKreis) ) {
+    overScheibe = true;
+    isStarted = true;
+  } else {
+    overScheibe = false;
+  }
+}
+
+boolean overCircle(int x, int y, int radius) {
+  float disX = x - mouseX;
+  float disY = y - mouseY;
+  if (sqrt(sq(disX) + sq(disY)) < radius ) {
+    return true;
+  } else {
+    return false;
   }
 }
