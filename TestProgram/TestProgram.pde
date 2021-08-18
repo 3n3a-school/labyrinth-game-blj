@@ -9,7 +9,7 @@ int colorKreis = #000000;
 
 String screen = "start"; // start, game, gameOver, imZiel
 
-PImage img;
+PImage img, arrow;
 
 void setup() {
   //fullScreen();
