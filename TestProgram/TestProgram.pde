@@ -21,7 +21,7 @@ int collisions = 0;
 int score = 1000;
 boolean isStarted = false;
 
-String levelName = "Labyrinth"+round(random(1, 4))+".png"
+String levelName = randomLevel();
 
 //String screen = "start"; // start, game, gameOver, imZiel
 String screen = "start";
@@ -35,16 +35,17 @@ void setup() {
   size(1920, 1080);
   frameRate(30);
   ellipseMode(RADIUS);
-  img = loadImage(levelName);
   s = new Stopwatch(this);
   s.start();
+  img = loadImage(levelName);
 
   scoreEventGen = new TimedEventGenerator(this);
   scoreEventGen.setIntervalMs(1000);
+  /*
   button1 = new GButton(this, 900, 470, 100, 30, "enter");
   button1.addEventHandler(this, "handleButton");
   textField1 = new GTextArea(this, 850, 400, 200, 50);
-  textField1.setPromptText("Please enter your name");
+  textField1.setPromptText("Please enter your name");*/
 };
 
 void onTimerEvent() {
@@ -60,6 +61,7 @@ void draw () {
     break;
     case "game" :
       // Koordinaten des Scheibe zu Koordinaten der Maus
+      
       startX = mouseX;
       startY = mouseY;
       startTiming();
@@ -112,6 +114,8 @@ void reset() {
   colorKreis = #000000;
   isStarted = false;
   score = 100;
+  levelName = randomLevel();
+  img = loadImage(levelName);
 }
 
 void update() {
@@ -154,4 +158,10 @@ public void handleButton(GButton button, GEvent event) {
    String message = textField1.getText();
    println(message);
    getRequest();
+}
+
+String randomLevel() {
+  String filename = "Labyrinth"+str(round(random(1, 4)))+".png";
+  println(filename);
+  return filename;
 }
