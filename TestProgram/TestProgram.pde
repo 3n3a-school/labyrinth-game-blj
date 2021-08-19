@@ -33,7 +33,7 @@ GTextArea textField1;
 
 void setup() {
   size(1920, 1080);
-  frameRate(30);
+  frameRate(60);
   ellipseMode(RADIUS);
   s = new Stopwatch(this);
   s.start();
@@ -41,10 +41,20 @@ void setup() {
 
   scoreEventGen = new TimedEventGenerator(this);
   scoreEventGen.setIntervalMs(1000);
+
+  // setVisible false
+  button1 = new GButton(this, 900, 470, 100, 30, "enter");
+  button1.addEventHandler(this, "handleButton");
+  button1.setVisible(false);
+  textField1 = new GTextArea(this, 850, 400, 200, 50);
+  textField1.setPromptText("Please enter your name");
+  textField1.setVisible(false);
 };
 
 void onTimerEvent() {
-  calcScore();
+  if (isStarted) {
+   calcScore();
+  }
 }
 
 void draw () {
@@ -69,8 +79,11 @@ void draw () {
       reset();
     break;	
     case "ziel" :
+      isStarted = false;
+      s.pause();
+      button1.setVisible(true);
+      textField1.setVisible(true);
       endingScreen();
-      textEingabe();
     break;
     default :
       text("Error Screen not Found.", 1000, 1000);
@@ -99,12 +112,10 @@ void reset() {
   startX = initX;
   startY = initY;
   radiusKreis = initKreis;
-  //startTime = millis() / 1000;
   collisions = 0;
   s.reset();
   colorKreis = #000000;
-  isStarted = false;
-  score = 100;
+  score = 1000;
   levelName = randomLevel();
   img = loadImage(levelName);
 }
@@ -125,31 +136,26 @@ boolean overCircle(int x, int y, int radius) {
   }
 }
 
-public void handleButtonEvents(GButton button, GEvent event) {
-  if(button == button1){
-    println("You have clicked on the first button");
-  }
-  println("The sketch has been running for " + millis() + " milliseconds");
-}
-
 void getRequest(){
   GetRequest get = new GetRequest("https://scores.enea.tech/rest/highscores");
   get.send(); // d program will wait untill the request is completed
   println("response: " + get.getContent());
 }
 
-public void handleTextEvents(GEditableTextControl textarea, GEvent event) {
-  println(event);
-}
-
 public void handleButton(GButton button, GEvent event) {
    String message = textField1.getText();
-   println(message + "  " + score);
+   //println(message + "  " + score);
+
+  button1.setVisible(false);
+  textField1.setVisible(false);
    // post request
+  
+  reset();
+  screen = "start";
 }
 
 String randomLevel() {
   String filename = "Labyrinth"+str(round(random(1, 4)))+".png";
-  println(filename);
+  //println(filename);
   return filename;
 }
