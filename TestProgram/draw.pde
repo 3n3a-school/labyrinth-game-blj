@@ -77,8 +77,10 @@ void endingScreen(){
   fill(#FFFFFF);
   background(#00BAFF);
   text("You Win", 700, 500);
+  textSize(60);
+  text("Score: " + score, 700, 750);
   textSize(80);
-  text("Press SPACE to play again", 450, 600);
+  text("Enter your name to Submit your Highscore!", 450, 600);
 }
 
 void gameOver(){
@@ -96,7 +98,7 @@ void startingScreen(){
   background(#33cccc);
   text("Welcome to our labyrinth", 350, 400);
   textSize(50);
-  text("Please enter your name and move over the button", 350, 500);
+  text("To start the game move your mouse to the ball.", 350, 500);
   textSize(30);
   text("Developed by Enea, Janis, Nando and Lilly", 600, 600);
   arrow = loadImage("arrow.png");
