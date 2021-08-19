@@ -22,6 +22,7 @@ Stopwatch s;
 int collisions = 0;
 int score = 1000;
 boolean isStarted = false;
+boolean alreadyReqH = false;
 
 String levelName = randomLevel();
 
@@ -30,6 +31,7 @@ String screen = "start";
 
 PImage img, arrow;
 PFont bold, standard;
+JSONArray highscoresDict;
 
 GButton button1;
 GTextArea textField1;
@@ -74,7 +76,11 @@ void draw () {
     case "start" :
       update();
       startingScreen();
-      JSONArray highscoresDict = getHighscores();
+      if (!alreadyReqH) {
+        highscoresDict = getHighscores();
+        println("rexeldjfldjfkdj");
+        alreadyReqH = true;
+      }
       showHighscore(highscoresDict);
       generiereScheibe(startX, startY);
     break;
@@ -131,6 +137,7 @@ void reset() {
   levelName = randomLevel();
   img = loadImage(levelName);
   createButtons();
+  alreadyReqH = false;
 }
 
 void update() {
