@@ -33,7 +33,7 @@ GTextArea textField1;
 
 void setup() {
   size(1920, 1080);
-  frameRate(60);
+  frameRate(300);
   ellipseMode(RADIUS);
   s = new Stopwatch(this);
   s.start();
@@ -43,18 +43,22 @@ void setup() {
   scoreEventGen.setIntervalMs(1000);
 
   // setVisible false
-  button1 = new GButton(this, 900, 470, 100, 30, "enter");
-  button1.addEventHandler(this, "handleButton");
-  button1.setVisible(false);
-  textField1 = new GTextArea(this, 850, 400, 200, 50);
-  textField1.setPromptText("Please enter your name");
-  textField1.setVisible(false);
+  createButtons();
 };
 
 void onTimerEvent() {
   if (isStarted) {
    calcScore();
   }
+}
+
+void createButtons() {
+  button1 = new GButton(this, 900, 470, 100, 30, "enter");
+  button1.addEventHandler(this, "handleButton");
+  button1.setVisible(false);
+  textField1 = new GTextArea(this, 850, 400, 200, 50);
+  textField1.setPromptText("Please enter your name");
+  textField1.setVisible(false);
 }
 
 void draw () {
@@ -118,6 +122,7 @@ void reset() {
   score = 1000;
   levelName = randomLevel();
   img = loadImage(levelName);
+  createButtons();
 }
 
 void update() {
