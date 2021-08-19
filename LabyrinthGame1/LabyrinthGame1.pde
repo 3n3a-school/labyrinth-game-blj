@@ -3,6 +3,9 @@ import http.requests.*;
 import lord_of_galaxy.timing_utils.*;
 import org.multiply.processing.TimedEventGenerator;
 
+import java.net.*;
+import java.util.*;
+
 private TimedEventGenerator scoreEventGen;
 
 import g4p_controls.*;
@@ -23,6 +26,7 @@ int collisions = 0;
 int score = 1000;
 boolean isStarted = false;
 boolean alreadyReqH = false;
+boolean connectivity = false;
 
 String levelName = randomLevel();
 
@@ -54,6 +58,7 @@ void setup() {
 
   // setVisible false
   createButtons();
+  isOnline();
 };
 
 void onTimerEvent() {
@@ -78,7 +83,7 @@ void draw () {
       startingScreen();
       if (!alreadyReqH) {
         highscoresDict = getHighscores();
-        println("rexeldjfldjfkdj");
+        //println("rexeldjfldjfkdj");
         alreadyReqH = true;
       }
       showHighscore(highscoresDict);
@@ -156,25 +161,56 @@ boolean overCircle(int x, int y, int radius) {
   }
 }
 
+void isOnline() {
+  try
+   {
+     URL url = new URL("http://processing.org");
+     URLConnection conn = url.openConnection();
+     conn.setConnectTimeout(5000);
+     conn.connect();
+     connectivity = true;
+     println("can connect / " + connectivity);
+   }
+   catch (Exception e)
+   {
+     connectivity = false;
+     System.out.println("can't connect / " + connectivity);
+   }
+}
+
 JSONArray getHighscores(){
-  GetRequest get = new GetRequest(baseurl+"/rest/highscores");
-  get.send(); // d program will wait untill the request is completed
-  //println("response: " + get.getContent());
-  JSONArray jsonarr = parseJSONArray(get.getContent());
-  return jsonarr;
+  if (connectivity) {
+    GetRequest get = new GetRequest(baseurl+"/rest/highscores");
+    get.send(); // d program will wait untill the request is completed
+    //println("response: " + get.getContent());
+    JSONArray jsonarr = parseJSONArray(get.getContent());
+    return jsonarr;
+  } else {
+    JSONArray array = loadJSONArray("data/save.json");
+    return array;
+  }
 }
 
 void postRequest(String name, int score){
-  PostRequest post = new PostRequest(baseurl+"/rest/highscores");
-  JSONObject json = new JSONObject();
-  json.setInt("score", score);
-  json.setString("name", name);
-  String jsonstring = json.toString();
+  if (connectivity) {
+    PostRequest post = new PostRequest(baseurl+"/rest/highscores");
+    JSONObject json = new JSONObject();
+    json.setInt("score", score);
+    json.setString("name", name);
+    String jsonstring = json.toString();
 
-  post.addHeader("Content-Type", "application/json");
-  post.addData(jsonstring);
-  post.send();
-  //println("response: " + post.getContent());
+    post.addHeader("Content-Type", "application/json");
+    post.addData(jsonstring);
+    post.send();
+    //println("response: " + post.getContent());
+  } else {
+    JSONArray array = loadJSONArray("data/save.json");
+    JSONObject obj = new JSONObject();
+    obj.setInt("score", score);
+    obj.setString("name", name);
+    array.setJSONObject(array.size(), obj);
+    saveJSONArray(array, "data/save.json");
+  }
 }
 
 public void handleButton(GButton button, GEvent event) {
