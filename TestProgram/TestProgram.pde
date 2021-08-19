@@ -11,7 +11,8 @@ float startTime, stopTime;
 int collisions = 0;
 int score = 100;
 
-String screen = "start"; // start, game, gameOver, imZiel
+//String screen = "start"; // start, game, gameOver, imZiel
+String screen = "eingabefeld";
 
 PImage img, arrow;
 
@@ -47,6 +48,9 @@ void draw () {
       endingScreen();
       reset();
     break;	
+    case "eingabefeld":
+      textEingabe();
+    break;
     default :
       text("Error Screen not Found.", 1000, 1000);
     break;	
