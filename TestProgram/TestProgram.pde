@@ -18,6 +18,8 @@ int collisions = 0;
 int score = 1000;
 boolean isStarted = false;
 
+String levelName = "Labyrinth"+round(random(1, 4))+".png"
+
 //String screen = "start"; // start, game, gameOver, imZiel
 String screen = "start";
 
@@ -27,7 +29,7 @@ void setup() {
   size(1920, 1080);
   frameRate(30);
   ellipseMode(RADIUS);
-  img = loadImage("Labyrinth.png");
+  img = loadImage(levelName);
   s = new Stopwatch(this);
   s.start();
 
