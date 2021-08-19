@@ -101,7 +101,7 @@ void startingScreen(){
   text("To start the game move your mouse to the ball.", 350, 300);
   textSize(30);
   text("Developed by Enea, Janis, Nando and Lilly", 600, 400);
-  arrow = loadImage("arrow.png");
+  arrow = loadImage("data/arrow.png");
   arrow.resize(200, 200);
   image(arrow, 130, 30);
 }

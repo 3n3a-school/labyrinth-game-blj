@@ -207,7 +207,7 @@ void showHighscore(JSONArray daddyJson) {
 }
 
 String randomLevel() {
-  String filename = "Labyrinth"+str(round(random(1, 10)))+".png";
+  String filename = "data/Labyrinth"+str(round(random(1, 10)))+".png";
   //println(filename);
   return filename;
 }
