@@ -1,3 +1,9 @@
+import http.requests.*;
+import lord_of_galaxy.timing_utils.*;
+import org.multiply.processing.TimedEventGenerator;
+
+private TimedEventGenerator scoreEventGen;
+
 // startposition scheibe
 int initX = 50;
 int initY = 80;
@@ -7,12 +13,13 @@ int startY = initY;
 int radiusKreis = initKreis;
 int colorKreis = #000000;
 
-float startTime, stopTime;
+Stopwatch s;
 int collisions = 0;
 int score = 100;
+boolean isStarted = false;
 
 //String screen = "start"; // start, game, gameOver, imZiel
-String screen = "eingabefeld";
+String screen = "start";
 
 PImage img, arrow;
 
@@ -21,8 +28,16 @@ void setup() {
   frameRate(30);
   ellipseMode(RADIUS);
   img = loadImage("Labyrinth.png");
-  startTime = millis() / 1000;
+  s = new Stopwatch(this);
+  s.start();
+
+  scoreEventGen = new TimedEventGenerator(this);
+  scoreEventGen.setIntervalMs(1000);
 };
+
+void onTimerEvent() {
+  calcScore();
+}
 
 void draw () {
   switch (screen) {
@@ -35,6 +50,7 @@ void draw () {
       // Koordinaten des Scheibe zu Koordinaten der Maus
       startX = mouseX;
       startY = mouseY;
+      startTiming();
       set(0,0, img);
       generiereScheibe(startX, startY);
       colorCollision();
@@ -67,12 +83,23 @@ void keyPressed() {
   }
 }
 
+void startTiming() {
+  if (isStarted == false) {
+    s.start();
+    isStarted = true;
+  }
+}
+
 void reset() {
   startX = initX;
   startY = initY;
   radiusKreis = initKreis;
-  startTime = millis() / 1000;
+  //startTime = millis() / 1000;
   collisions = 0;
+  s.reset();
+  colorKreis = #000000;
+  isStarted = false;
+  score = 100;
 }
 
 void update() {

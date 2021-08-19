@@ -1,4 +1,4 @@
-import http.requests.*;
+
 
 String getColorHex(int x, int y) {
   color c = img.get(x, y);
@@ -107,19 +107,17 @@ void startingScreen(){
 void scoreBoard() {
   textSize(40);
   fill(#FF0000);
-  float currentTime = (float) millis() / 1000;
-  float timeFloat = currentTime - startTime;
-  String time = nf(timeFloat, 0, 3);
 
-  score = calcHighscore(timeFloat, collisions);
-  
-  text("Score: "+score+" Time: "+time+" Collisions: "+collisions, 600, 50);
+  text(score, 900, 50);
+  text(nf(s.minute(), 2) + ":" + nf(s.second(), 2) + ":" + nf(s.millis(), 3), 600, 50);
 }
 
-int calcHighscore(float time, int collisions) {
-  float scoreTime = score - time/100;
-  float highscore = scoreTime - (float) collisions/100;
-  return round(highscore);
+void calcScore() {
+  if (score <= 0) {
+    score = 0;
+  } else {
+    score = score - (s.second() + (round(collisions*0.5)));
+  }
 }
 
 void textEingabe() {
