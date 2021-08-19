@@ -76,11 +76,11 @@ void endingScreen(){
   textSize(100);
   fill(#FFFFFF);
   background(#00BAFF);
-  text("You Win", 700, 500);
+  text("You Win", 700, 200);
   textSize(60);
-  text("Score: " + score, 700, 750);
-  textSize(80);
-  text("Enter your name to Submit your Highscore!", 450, 600);
+  text("Score: " + score, 750, 400);
+  textSize(50);
+  text("Enter your name to Submit your Highscore!", 450, 300);
 }
 
 void gameOver(){
@@ -94,7 +94,7 @@ void gameOver(){
 
 void startingScreen(){
   textSize(100);
-  fill(#FFFFFF);
+  fill(0);
   background(#33cccc);
   text("Welcome to our labyrinth", 350, 200);
   textSize(50);

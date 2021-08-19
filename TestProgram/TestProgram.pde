@@ -7,7 +7,7 @@ private TimedEventGenerator scoreEventGen;
 
 import g4p_controls.*;
 
-String baseurl = "http://localhost:8083";
+String baseurl = "https://scores.enea.tech";
 
 // startposition scheibe
 int initX = 80;
@@ -36,7 +36,7 @@ GTextArea textField1;
 
 void setup() {
   size(1920, 1080);
-  frameRate(300);
+  frameRate(30);
   ellipseMode(RADIUS);
   s = new Stopwatch(this);
   s.start();
@@ -61,10 +61,10 @@ void onTimerEvent() {
 }
 
 void createButtons() {
-  button1 = new GButton(this, 900, 470, 100, 30, "enter");
+  button1 = new GButton(this, 900, 770, 100, 30, "enter");
   button1.addEventHandler(this, "handleButton");
   button1.setVisible(false);
-  textField1 = new GTextArea(this, 850, 400, 200, 50);
+  textField1 = new GTextArea(this, 850, 700, 200, 50);
   textField1.setPromptText("Please enter your name");
   textField1.setVisible(false);
 }
