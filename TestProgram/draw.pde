@@ -122,5 +122,9 @@ void calcScore() {
 }
 
 void textEingabe() {
+  button1 = new GButton(this, 900, 470, 100, 30, "enter");
+  button1.addEventHandler(this, "handleButton");
+  textField1 = new GTextArea(this, 850, 400, 200, 50);
+  textField1.setPromptText("Please enter your name");
   text("test", 1000, 100);
 }

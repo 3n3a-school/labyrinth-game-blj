@@ -41,11 +41,6 @@ void setup() {
 
   scoreEventGen = new TimedEventGenerator(this);
   scoreEventGen.setIntervalMs(1000);
-  /*
-  button1 = new GButton(this, 900, 470, 100, 30, "enter");
-  button1.addEventHandler(this, "handleButton");
-  textField1 = new GTextArea(this, 850, 400, 200, 50);
-  textField1.setPromptText("Please enter your name");*/
 };
 
 void onTimerEvent() {
@@ -61,7 +56,6 @@ void draw () {
     break;
     case "game" :
       // Koordinaten des Scheibe zu Koordinaten der Maus
-      
       startX = mouseX;
       startY = mouseY;
       startTiming();
@@ -76,9 +70,6 @@ void draw () {
     break;	
     case "ziel" :
       endingScreen();
-      reset();
-    break;	
-    case "eingabefeld":
       textEingabe();
     break;
     default :
@@ -145,9 +136,6 @@ void getRequest(){
   GetRequest get = new GetRequest("https://scores.enea.tech/rest/highscores");
   get.send(); // d program will wait untill the request is completed
   println("response: " + get.getContent());
-  JSONObject response = parseJSONObject(get.getContent());
-  println("status: " + response.getString("status"));
-  println("data: " + response.getJSONObject("data"));
 }
 
 public void handleTextEvents(GEditableTextControl textarea, GEvent event) {
@@ -156,8 +144,8 @@ public void handleTextEvents(GEditableTextControl textarea, GEvent event) {
 
 public void handleButton(GButton button, GEvent event) {
    String message = textField1.getText();
-   println(message);
-   getRequest();
+   println(message + "  " + score);
+   // post request
 }
 
 String randomLevel() {
