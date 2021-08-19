@@ -5,7 +5,7 @@ import org.multiply.processing.TimedEventGenerator;
 private TimedEventGenerator scoreEventGen;
 
 // startposition scheibe
-int initX = 50;
+int initX = 80;
 int initY = 80;
 int initKreis = 40;
 int startX = initX;
@@ -15,7 +15,7 @@ int colorKreis = #000000;
 
 Stopwatch s;
 int collisions = 0;
-int score = 100;
+int score = 1000;
 boolean isStarted = false;
 
 //String screen = "start"; // start, game, gameOver, imZiel

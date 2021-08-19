@@ -109,6 +109,7 @@ void scoreBoard() {
   fill(#FF0000);
 
   text(score, 900, 50);
+  text(collisions, 1000, 50);
   text(nf(s.minute(), 2) + ":" + nf(s.second(), 2) + ":" + nf(s.millis(), 3), 600, 50);
 }
 
