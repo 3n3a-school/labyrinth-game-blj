@@ -7,6 +7,8 @@ private TimedEventGenerator scoreEventGen;
 
 import g4p_controls.*;
 
+String baseurl = "http://localhost:8083";
+
 // startposition scheibe
 int initX = 80;
 int initY = 80;
@@ -97,9 +99,7 @@ void draw () {
 
 void keyPressed() {
   if (key == 32) {
-    if (screen == "ziel") {
-      screen = "start";
-    } else if (screen == "gameOver") {
+    if (screen == "gameOver") {
       screen = "start";
     }
   }
@@ -142,9 +142,22 @@ boolean overCircle(int x, int y, int radius) {
 }
 
 void getRequest(){
-  GetRequest get = new GetRequest("https://scores.enea.tech/rest/highscores");
+  GetRequest get = new GetRequest(baseurl+"/rest/highscores");
   get.send(); // d program will wait untill the request is completed
   println("response: " + get.getContent());
+}
+
+void postRequest(String name, int score){
+  PostRequest post = new PostRequest(baseurl+"/rest/highscores");
+  JSONObject json = new JSONObject();
+  json.setInt("score", score);
+  json.setString("name", name);
+  String jsonstring = json.toString();
+
+  post.addHeader("Content-Type", "application/json");
+  post.addData(jsonstring);
+  post.send();
+  println("response: " + post.getContent());
 }
 
 public void handleButton(GButton button, GEvent event) {
@@ -153,7 +166,7 @@ public void handleButton(GButton button, GEvent event) {
 
   button1.setVisible(false);
   textField1.setVisible(false);
-   // post request
+  postRequest(message, score);
   
   reset();
   screen = "start";
