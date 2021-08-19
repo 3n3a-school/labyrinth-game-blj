@@ -29,6 +29,7 @@ String levelName = randomLevel();
 String screen = "start";
 
 PImage img, arrow;
+PFont bold, standard;
 
 GButton button1;
 GTextArea textField1;
@@ -40,6 +41,11 @@ void setup() {
   s = new Stopwatch(this);
   s.start();
   img = loadImage(levelName);
+
+  bold = createFont("Roboto-Bold.ttf", 30);
+
+  standard = createFont("Roboto-Regular.ttf", 30);
+  textFont(standard);
 
   scoreEventGen = new TimedEventGenerator(this);
   scoreEventGen.setIntervalMs(1000);
@@ -68,6 +74,8 @@ void draw () {
     case "start" :
       update();
       startingScreen();
+      JSONArray highscoresDict = getHighscores();
+      showHighscore(highscoresDict);
       generiereScheibe(startX, startY);
     break;
     case "game" :
@@ -141,10 +149,12 @@ boolean overCircle(int x, int y, int radius) {
   }
 }
 
-void getRequest(){
+JSONArray getHighscores(){
   GetRequest get = new GetRequest(baseurl+"/rest/highscores");
   get.send(); // d program will wait untill the request is completed
-  println("response: " + get.getContent());
+  //println("response: " + get.getContent());
+  JSONArray jsonarr = parseJSONArray(get.getContent());
+  return jsonarr;
 }
 
 void postRequest(String name, int score){
@@ -157,7 +167,7 @@ void postRequest(String name, int score){
   post.addHeader("Content-Type", "application/json");
   post.addData(jsonstring);
   post.send();
-  println("response: " + post.getContent());
+  //println("response: " + post.getContent());
 }
 
 public void handleButton(GButton button, GEvent event) {
@@ -172,8 +182,32 @@ public void handleButton(GButton button, GEvent event) {
   screen = "start";
 }
 
+void showHighscore(JSONArray daddyJson) {
+  int startCoordsX = 790;
+  int startCoordsY = 550;
+  int offset = 0;
+  textSize(30);
+  fill(0);
+  textFont(bold);
+  text("Scores", startCoordsX + 10, startCoordsY - 40);
+  text("Names", startCoordsX + 200, startCoordsY - 40);
+  textFont(standard);
+  for (int i=0; i < daddyJson.size(); i++) {
+    JSONObject json = daddyJson.getJSONObject(i);
+
+    String name =json.getString("name");
+    int score =json.getInt("score");
+    // score
+    text(str(score), startCoordsX, startCoordsY + offset);
+    // name
+    text(name, startCoordsX + 200, startCoordsY + offset);
+
+    offset += 40;
+  }
+}
+
 String randomLevel() {
-  String filename = "Labyrinth"+str(round(random(1, 4)))+".png";
+  String filename = "Labyrinth"+str(round(random(1, 10)))+".png";
   //println(filename);
   return filename;
 }

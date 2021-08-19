@@ -96,14 +96,14 @@ void startingScreen(){
   textSize(100);
   fill(#FFFFFF);
   background(#33cccc);
-  text("Welcome to our labyrinth", 350, 400);
+  text("Welcome to our labyrinth", 350, 200);
   textSize(50);
-  text("To start the game move your mouse to the ball.", 350, 500);
+  text("To start the game move your mouse to the ball.", 350, 300);
   textSize(30);
-  text("Developed by Enea, Janis, Nando and Lilly", 600, 600);
+  text("Developed by Enea, Janis, Nando and Lilly", 600, 400);
   arrow = loadImage("arrow.png");
   arrow.resize(200, 200);
-  image(arrow, 100, 30);
+  image(arrow, 130, 30);
 }
 
 void scoreBoard() {
