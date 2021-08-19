@@ -1,8 +1,11 @@
+
 import http.requests.*;
 import lord_of_galaxy.timing_utils.*;
 import org.multiply.processing.TimedEventGenerator;
 
 private TimedEventGenerator scoreEventGen;
+
+import g4p_controls.*;
 
 // startposition scheibe
 int initX = 80;
@@ -25,6 +28,9 @@ String screen = "start";
 
 PImage img, arrow;
 
+GButton button1;
+GTextArea textField1;
+
 void setup() {
   size(1920, 1080);
   frameRate(30);
@@ -35,6 +41,10 @@ void setup() {
 
   scoreEventGen = new TimedEventGenerator(this);
   scoreEventGen.setIntervalMs(1000);
+  button1 = new GButton(this, 900, 470, 100, 30, "enter");
+  button1.addEventHandler(this, "handleButton");
+  textField1 = new GTextArea(this, 850, 400, 200, 50);
+  textField1.setPromptText("Please enter your name");
 };
 
 void onTimerEvent() {
@@ -118,4 +128,30 @@ boolean overCircle(int x, int y, int radius) {
   } else {
     return false;
   }
+}
+
+public void handleButtonEvents(GButton button, GEvent event) {
+  if(button == button1){
+    println("You have clicked on the first button");
+  }
+  println("The sketch has been running for " + millis() + " milliseconds");
+}
+
+void getRequest(){
+  GetRequest get = new GetRequest("https://scores.enea.tech/rest/highscores");
+  get.send(); // d program will wait untill the request is completed
+  println("response: " + get.getContent());
+  JSONObject response = parseJSONObject(get.getContent());
+  println("status: " + response.getString("status"));
+  println("data: " + response.getJSONObject("data"));
+}
+
+public void handleTextEvents(GEditableTextControl textarea, GEvent event) {
+  println(event);
+}
+
+public void handleButton(GButton button, GEvent event) {
+   String message = textField1.getText();
+   println(message);
+   getRequest();
 }
